@@ -12,6 +12,7 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'valloric/youcompleteme'
 Plugin 'ervandew/supertab'
 Plugin 'SirVer/ultisnips'
+Plugin 'fatih/vim-go'
 
 " make YCM compatible with UltiSnips (using supertab)
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
@@ -22,8 +23,6 @@ let g:SuperTabDefaultCompletionType = '<C-n>'
 let g:UltiSnipsExpandTrigger = "<tab>"
 let g:UltiSnipsJumpForwardTrigger = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
-
-
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -98,13 +97,11 @@ augroup END
 let g:is_posix = 1
 
 " Softtabs, 2 spaces
-set tabstop=2
-set shiftwidth=2
+set autoindent
+set tabstop=4
+set shiftwidth=4
 set shiftround
-set expandtab
-
-" Display extra whitespace
-set list listchars=tab:»·,trail:·,nbsp:·
+set noexpandtab
 
 " Use one space, not two, after punctuation.
 set nojoinspaces
@@ -198,10 +195,16 @@ autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
-autocmd FileType python map <buffer> <c-r> :!python %<CR>
-autocmd FileType javascript map <buffer> <c-r> :!node %<CR>
-autocmd FileType cpp map <buffer> <c-c> :!g++ %<CR>
-autocmd FileType cpp map <buffer> <c-r> :!./a.out<CR>
+" Map run code commands 
+autocmd FileType python map <buffer> <s-r> :!python %<CR>
+autocmd FileType javascript map <buffer> <s-r> :!node %<CR>
+autocmd FileType cpp map <buffer> <s-c> :!g++ %<CR>
+autocmd FileType cpp map <buffer> <s-r> :!./a.out<CR>
+autocmd FileType go map <buffer> <s-c> :GoBuild<CR>
+autocmd FileType go map <buffer> <s-i> :GoInstall<CR>
+autocmd FileType go map <buffer> <s-t> :GoTest<CR>
+autocmd FileType go map <buffer> <s-h> :GoTestFunc<CR>
+autocmd FileType go map <buffer> <s-r> :GoRun<CR>
 
 nmap <c-t> :NERDTreeToggle<CR>
 :inoremap <c-d> $$<Left>
