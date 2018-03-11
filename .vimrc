@@ -4,8 +4,6 @@ filetype off                  " required
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
@@ -13,6 +11,8 @@ Plugin 'valloric/youcompleteme'
 Plugin 'ervandew/supertab'
 Plugin 'SirVer/ultisnips'
 Plugin 'fatih/vim-go'
+Plugin '2072/PHP-Indenting-for-VIm'
+Plugin 'scrooloose/nerdtree'
 
 " make YCM compatible with UltiSnips (using supertab)
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
@@ -28,19 +28,6 @@ let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 call vundle#end()            " required
 
 filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
-" Leader
-
 
 let mapleader = " "
 
@@ -55,7 +42,6 @@ set incsearch     " do incremental searching
 set laststatus=2  " Always display the status line
 set relativenumber
 set autowrite     " Automatically :write before running commands
-
 
 " Switch syntax highlighting on, when the terminal has colors
 " Also switch on highlighting the last used search pattern.
@@ -145,12 +131,6 @@ inoremap <S-Tab> <c-n>
 " Switch between the last two files
 nnoremap <Leader><Leader> <c-^>
 
-" Get off my lawn
-nnoremap <Left> :echoe "Use h"<CR>
-nnoremap <Right> :echoe "Use l"<CR>
-nnoremap <Up> :echoe "Use k"<CR>
-nnoremap <Down> :echoe "Use j"<CR>
-
 " vim-test mappings
 nnoremap <silent> <Leader>t :TestFile<CR>
 nnoremap <silent> <Leader>s :TestNearest<CR>
@@ -169,10 +149,11 @@ set splitbelow
 set splitright
 
 " Quicker window movement
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-h> <C-w>h
-nnoremap <C-l> <C-w>l
+nnoremap <s-j> <C-w>j
+nnoremap <s-k> <C-w>k
+nnoremap <s-h> <C-w>h
+nnoremap <s-l> <C-w>l
+nnoremap <Tab> i<Tab><Esc>
 
 " Move between linting errors
 nnoremap ]r :ALENextWrap<CR>
@@ -188,7 +169,7 @@ set complete+=kspell
 " Always use vertical diffs
 set diffopt+=vertical
 
-colorscheme chroma
+colorscheme monokai
 
 execute pathogen#infect()
 autocmd StdinReadPre * let s:std_in=1
@@ -199,29 +180,26 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 autocmd FileType python map <buffer> <s-r> :!python %<CR>
 autocmd FileType javascript map <buffer> <s-r> :!node %<CR>
 autocmd FileType cpp map <buffer> <s-c> :!g++ %<CR>
-autocmd FileType cpp map <buffer> <s-r> :!./a.out<CR>
+autocmd FileType cpp map <buffer> <s-r> :!g++ % && ./a.out<CR>
 autocmd FileType go map <buffer> <s-c> :GoBuild<CR>
 autocmd FileType go map <buffer> <s-i> :GoInstall<CR>
-autocmd FileType go map <buffer> <s-t> :GoTest<CR>
-autocmd FileType go map <buffer> <s-h> :GoTestFunc<CR>
 autocmd FileType go map <buffer> <s-r> :GoRun<CR>
+autocmd FileType html map <buffer> <s-r> :!open -a "Google Chrome" file:///%:p<CR>
 
-nmap <c-t> :NERDTreeToggle<CR>
+nmap <s-t> :NERDTreeToggle<CR>
+map  <Left> :tabn<CR>
+map  <Right> :tabp<CR>
+
+map <s-w> :w<CR>
 :inoremap <c-d> $$<Left>
 :inoremap {<CR> {<CR>}<Esc>ko
 :inoremap { {}<Left>
-nmap <S-Enter> O<Esc>
-nmap <CR> o<Esc>
+map <CR> i<CR>
 autocmd FileType javascript noremap <buffer>  <c-f> :call JsBeautify()<cr>
-" for json
 autocmd FileType json noremap <buffer> <c-f> :call JsonBeautify()<cr>
-" for jsx
 autocmd FileType jsx noremap <buffer> <c-f> :call JsxBeautify()<cr>
-" for html
 autocmd FileType html noremap <buffer> <c-f> :call HtmlBeautify()<cr>
-" for css or scss
 autocmd FileType css noremap <buffer> <c-f> :call CSSBeautify()<cr>
-
 
 " Local config
 if filereadable($HOME . "/.vimrc.local")
