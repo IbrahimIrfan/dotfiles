@@ -10,8 +10,7 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'valloric/youcompleteme'
 Plugin 'ervandew/supertab'
 Plugin 'SirVer/ultisnips'
-Plugin 'fatih/vim-go'
-Plugin '2072/PHP-Indenting-for-VIm'
+Plugin 'honza/vim-snippets'
 Plugin 'scrooloose/nerdtree'
 
 " make YCM compatible with UltiSnips (using supertab)
