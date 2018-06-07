@@ -42,6 +42,9 @@ set laststatus=2  " Always display the status line
 set relativenumber
 set autowrite     " Automatically :write before running commands
 
+" YouCompleteMe Requires this
+set encoding=utf-8
+
 " Switch syntax highlighting on, when the terminal has colors
 " Also switch on highlighting the last used search pattern.
 if (&t_Co > 2 || has("gui_running")) && !exists("syntax_on")
@@ -176,18 +179,23 @@ autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " Map run code commands 
-autocmd FileType python map <buffer> <s-r> :!python %<CR>
-autocmd FileType javascript map <buffer> <s-r> :!node %<CR>
-autocmd FileType cpp map <buffer> <s-c> :!g++ %<CR>
-autocmd FileType cpp map <buffer> <s-r> :!g++ % && ./a.out<CR>
-autocmd FileType go map <buffer> <s-c> :GoBuild<CR>
-autocmd FileType go map <buffer> <s-i> :GoInstall<CR>
-autocmd FileType go map <buffer> <s-r> :GoRun<CR>
-autocmd FileType html map <buffer> <s-r> :!open -a "Google Chrome" file:///%:p<CR>
+autocmd FileType python map <buffer> <s-r> :term python %<CR>
+autocmd FileType javascript map <buffer> <s-r> :term node %<CR>
+autocmd FileType cpp map <buffer> <s-c> :term g++ %<CR>
+autocmd FileType cpp map <buffer> <s-r> :term g++ % && ./a.out<CR>
+autocmd FileType html map <buffer> <s-r> :term open -a "Google Chrome" file:///%:p<CR>
 
+" Nerdtree and tab mappings
 nmap <s-t> :NERDTreeToggle<CR>
 map  <Left> :tabn<CR>
 map  <Right> :tabp<CR>
+
+" Terminal mappings
+" TODO: figure out why source ~/.bash_profile stopped working
+map <s-b> :vertical :botright :term<CR>
+tmap <s-h> <c-w>:hide!<CR>
+tmap <s-q> <c-w>:quit!<CR>
+tnoremap <Esc> <C-W>N
 
 map <s-w> :w<CR>
 :inoremap <c-d> $$<Left>
