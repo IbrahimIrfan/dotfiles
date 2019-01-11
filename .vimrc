@@ -7,11 +7,16 @@ call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
-Plugin 'valloric/youcompleteme'
 Plugin 'ervandew/supertab'
+Plugin 'valloric/youcompleteme'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
+Plugin 'hkmix/vim-george'
 Plugin 'scrooloose/nerdtree'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'vim-airline/vim-airline'
+Plugin 'tpope/vim-fugitive'
+Plugin 'dracula/vim'
 
 " make YCM compatible with UltiSnips (using supertab)
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
@@ -115,6 +120,10 @@ endif
 set number
 set numberwidth=5
 
+" Colorscheme
+syntax enable
+colorscheme dracula
+
 " Tab completion
 " will insert tab at beginning of line,
 " will use completion if not at beginning
@@ -132,13 +141,6 @@ inoremap <S-Tab> <c-n>
 
 " Switch between the last two files
 nnoremap <Leader><Leader> <c-^>
-
-" vim-test mappings
-nnoremap <silent> <Leader>t :TestFile<CR>
-nnoremap <silent> <Leader>s :TestNearest<CR>
-nnoremap <silent> <Leader>l :TestLast<CR>
-nnoremap <silent> <Leader>a :TestSuite<CR>
-nnoremap <silent> <Leader>gt :TestVisit<CR>
 
 " Run commands that require an interactive shell
 nnoremap <Leader>r :RunInInteractiveShell<space>
@@ -171,7 +173,8 @@ set complete+=kspell
 " Always use vertical diffs
 set diffopt+=vertical
 
-colorscheme monokai
+" git gutter
+set updatetime=100
 
 execute pathogen#infect()
 autocmd StdinReadPre * let s:std_in=1
@@ -190,6 +193,10 @@ nmap <s-t> :NERDTreeToggle<CR>
 map  <Left> :tabn<CR>
 map  <Right> :tabp<CR>
 
+" Fugitive git mappings
+nmap <s-c> :Gcommit %<CR>
+nmap <s-s> :Gstatus<CR>
+
 " Terminal mappings
 " TODO: figure out why source ~/.bash_profile stopped working
 map <s-b> :vertical :botright :term<CR>
@@ -197,6 +204,7 @@ tmap <s-h> <c-w>:hide!<CR>
 tmap <s-q> <c-w>:quit!<CR>
 tnoremap <Esc> <C-W>N
 
+" Latex
 map <s-w> :w<CR>
 :inoremap <c-d> $$<Left>
 :inoremap {<CR> {<CR>}<Esc>ko
@@ -207,6 +215,10 @@ autocmd FileType json noremap <buffer> <c-f> :call JsonBeautify()<cr>
 autocmd FileType jsx noremap <buffer> <c-f> :call JsxBeautify()<cr>
 autocmd FileType html noremap <buffer> <c-f> :call HtmlBeautify()<cr>
 autocmd FileType css noremap <buffer> <c-f> :call CSSBeautify()<cr>
+
+set cursorline
+hi CursorLine cterm=NONE ctermbg=235
+highlight Normal ctermfg=white ctermbg=234
 
 " Local config
 if filereadable($HOME . "/.vimrc.local")
