@@ -11,12 +11,20 @@ Plugin 'ervandew/supertab'
 Plugin 'valloric/youcompleteme'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
-Plugin 'hkmix/vim-george'
+Plugin 'fatih/vim-go'
 Plugin 'scrooloose/nerdtree'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'vim-airline/vim-airline'
-Plugin 'tpope/vim-fugitive'
-Plugin 'dracula/vim'
+Plugin 'ayu-theme/ayu-vim'
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+
+" 256 color
+set t_Co=256
+set termguicolors     " enable true colors support
+let ayucolor="dark"   " for dark version of theme
+colorscheme ayu
 
 " make YCM compatible with UltiSnips (using supertab)
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
@@ -28,12 +36,15 @@ let g:UltiSnipsExpandTrigger = "<tab>"
 let g:UltiSnipsJumpForwardTrigger = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-
 filetype plugin indent on    " required
 
 let mapleader = " "
+
+" faster saving/quitting
+map <leader>q :q<cr>
+nnoremap <leader><leader> :xa<cr>
+nnoremap <leader>s :w<cr>
+:nmap ; :
 
 set backspace=2   " Backspace deletes like most programs in insert mode
 set nobackup
@@ -50,11 +61,7 @@ set autowrite     " Automatically :write before running commands
 " YouCompleteMe Requires this
 set encoding=utf-8
 
-" Switch syntax highlighting on, when the terminal has colors
-" Also switch on highlighting the last used search pattern.
-if (&t_Co > 2 || has("gui_running")) && !exists("syntax_on")
-  syntax on
-endif
+syntax on
 
 if filereadable(expand("~/.vimrc.bundles"))
   source ~/.vimrc.bundles
@@ -64,8 +71,6 @@ endif
 if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
   runtime! macros/matchit.vim
 endif
-
-filetype plugin indent on
 
 augroup vimrcEx
   autocmd!
@@ -120,10 +125,6 @@ endif
 set number
 set numberwidth=5
 
-" Colorscheme
-syntax enable
-colorscheme dracula
-
 " Tab completion
 " will insert tab at beginning of line,
 " will use completion if not at beginning
@@ -138,9 +139,6 @@ function! InsertTabWrapper()
 endfunction
 inoremap <Tab> <c-r>=InsertTabWrapper()<cr>
 inoremap <S-Tab> <c-n>
-
-" Switch between the last two files
-nnoremap <Leader><Leader> <c-^>
 
 " Run commands that require an interactive shell
 nnoremap <Leader>r :RunInInteractiveShell<space>
@@ -181,7 +179,7 @@ autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
-" Map run code commands 
+" Map run code commands
 autocmd FileType python map <buffer> <s-r> :term python %<CR>
 autocmd FileType javascript map <buffer> <s-r> :term node %<CR>
 autocmd FileType cpp map <buffer> <s-c> :term g++ %<CR>
@@ -193,23 +191,14 @@ nmap <s-t> :NERDTreeToggle<CR>
 map  <Left> :tabn<CR>
 map  <Right> :tabp<CR>
 
-" Fugitive git mappings
-nmap <s-c> :Gcommit %<CR>
-nmap <s-s> :Gstatus<CR>
-
-" Terminal mappings
-" TODO: figure out why source ~/.bash_profile stopped working
-map <s-b> :vertical :botright :term<CR>
-tmap <s-h> <c-w>:hide!<CR>
-tmap <s-q> <c-w>:quit!<CR>
-tnoremap <Esc> <C-W>N
+" GoLang stuff
+let g:go_fmt_command = "goimports"
 
 " Latex
-map <s-w> :w<CR>
 :inoremap <c-d> $$<Left>
 :inoremap {<CR> {<CR>}<Esc>ko
 :inoremap { {}<Left>
-map <CR> i<CR>
+map <CR> A<CR>
 autocmd FileType javascript noremap <buffer>  <c-f> :call JsBeautify()<cr>
 autocmd FileType json noremap <buffer> <c-f> :call JsonBeautify()<cr>
 autocmd FileType jsx noremap <buffer> <c-f> :call JsxBeautify()<cr>
