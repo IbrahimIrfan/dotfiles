@@ -15,7 +15,6 @@ Plugin 'fatih/vim-go'
 Plugin 'scrooloose/nerdtree'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'vim-airline/vim-airline'
-Plugin 'ayu-theme/ayu-vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -23,8 +22,8 @@ call vundle#end()            " required
 " 256 color
 set t_Co=256
 set termguicolors     " enable true colors support
-let ayucolor="dark"   " for dark version of theme
-colorscheme ayu
+
+colorscheme focuspoint
 
 " make YCM compatible with UltiSnips (using supertab)
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
@@ -198,6 +197,7 @@ let g:go_fmt_command = "goimports"
 :inoremap <c-d> $$<Left>
 :inoremap {<CR> {<CR>}<Esc>ko
 :inoremap { {}<Left>
+map <c-f> :!pdflatex % && open %:r.pdf<CR>
 map <CR> A<CR>
 autocmd FileType javascript noremap <buffer>  <c-f> :call JsBeautify()<cr>
 autocmd FileType json noremap <buffer> <c-f> :call JsonBeautify()<cr>

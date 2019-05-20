@@ -14,6 +14,7 @@ alias cp='cp -i -r'
 alias mv='mv -i'
 alias dtop='cd ~/Desktop'
 alias dloads='cd ~/Downloads'
+alias school='cd ~/Desktop/School'
 alias gs='git status'
 alias gl="git log"
 alias gd='git diff'
@@ -29,5 +30,6 @@ alias cd..='cd ..'
 alias l="ls"
 alias ..="cd .."
 alias v="vim"
+alias sshuw='ssh i2999irf@linux.student.cs.uwaterloo.ca'
 
 set -o vi
