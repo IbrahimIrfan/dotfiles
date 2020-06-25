@@ -9,7 +9,7 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'ervandew/supertab'
 Plugin 'valloric/youcompleteme'
-Plugin 'SirVer/ultisnips'
+"Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'fatih/vim-go'
 Plugin 'scrooloose/nerdtree'
@@ -23,7 +23,7 @@ call vundle#end()            " required
 set t_Co=256
 set termguicolors     " enable true colors support
 
-colorscheme focuspoint
+colorscheme monokai
 
 " make YCM compatible with UltiSnips (using supertab)
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
@@ -166,9 +166,6 @@ set spellfile=$HOME/.vim-spell-en.utf-8.add
 
 " Autocomplete with dictionary words when spell check is on
 set complete+=kspell
-
-" Always use vertical diffs
-set diffopt+=vertical
 
 " git gutter
 set updatetime=100

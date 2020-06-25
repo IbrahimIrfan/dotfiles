@@ -20,6 +20,8 @@ alias gl="git log"
 alias gd='git diff'
 alias gds='git diff --staged'
 alias gcm='git commit -am'
+alias gpo='git push origin'
+alias gpm='git push origin master'
 alias vrc='vim ~/.vimrc'
 alias vrcs='source ~/.vimrc'
 alias bp='vim ~/.bash_profile'
@@ -30,6 +32,13 @@ alias cd..='cd ..'
 alias l="ls"
 alias ..="cd .."
 alias v="vim"
-alias sshuw='ssh i2999irf@linux.student.cs.uwaterloo.ca'
-
+alias sshuw='ssh -X i2999irf@linux.student.cs.uwaterloo.ca'
+alias cs="cd"
+alias 465='cd ~/Desktop/se465/proj'
+alias 349='cd ~/Desktop/cs349/assignments/a5'
+alias rpi='192.168.2.170'
+alias ref='cd ~/Desktop/referd/'
 set -o vi
+export PATH="/Users/ibrahimirfan/.ebcli-virtual-env/executables:$PATH"
+export PATH="/Users/ibrahimirfan/.pyenv/versions/3.7.2/bin:$PATH"
+export PATH="$PATH:/Users/ibrahimirfan/flutter/bin"
